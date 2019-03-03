@@ -14,7 +14,7 @@ public class Point {
   }
 
   public double getDistanceTo(Point point){
-    return sqrt(pow((point.positionX-this.positionX),2) + pow((point.positionY+this.positionY),2));
+    return sqrt(pow((point.positionX-this.positionX),2) + pow((point.positionY-this.positionY),2));
   }
 
 }
