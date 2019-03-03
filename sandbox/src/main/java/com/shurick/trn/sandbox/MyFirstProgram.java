@@ -1,4 +1,4 @@
-package com.shurick.trn;
+package com.shurick.trn.sandbox;
 
 public class MyFirstProgram {
 

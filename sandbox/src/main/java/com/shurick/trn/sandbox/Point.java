@@ -1,4 +1,4 @@
-package com.shurick.trn;
+package com.shurick.trn.sandbox;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
