@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
+import java.util.concurrent.TimeUnit;
 
 public class GroupCreationTest {
   private WebDriver wd;
@@ -12,16 +13,18 @@ public class GroupCreationTest {
     //MacOS
     System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
     wd = new ChromeDriver();
-  }
-
-  @Test
-  public void testGroupCreation() throws Exception {
+    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/index.php");
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys("admin");
     wd.findElement(By.name("pass")).clear();
     wd.findElement(By.name("pass")).sendKeys("secret");
     wd.findElement(By.xpath("//input[@value='Login']")).click();
+  }
+
+  @Test
+  public void testGroupCreation() throws Exception {
+
     wd.findElement(By.linkText("groups")).click();
     wd.findElement(By.name("new")).click();
     wd.findElement(By.name("group_name")).clear();
