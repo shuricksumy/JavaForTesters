@@ -9,7 +9,10 @@ repositories {
 }
 
 test {
-    useTestNG()
+    useTestNG(){
+        useDefaultListeners = true
+        suites "src/test/resources/simpleSuite.xml"
+    }
 }
 
 dependencies {

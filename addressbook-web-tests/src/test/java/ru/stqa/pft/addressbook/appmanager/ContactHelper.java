@@ -39,4 +39,20 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
+  public void deleteSelectedContact() {
+    click(By.cssSelector("input[onclick^=DeleteSel]"));
+    wd.switchTo().alert().accept();
+  }
+
+  public void selectFirstContact() {
+    click(By.name("selected[]"));
+  }
+
+  public void initContactEdit() {
+    click(By.cssSelector("a img[title=Edit]"));
+  }
+
+  public void submitChanges() {
+    click(By.name("update"));
+  }
 }
