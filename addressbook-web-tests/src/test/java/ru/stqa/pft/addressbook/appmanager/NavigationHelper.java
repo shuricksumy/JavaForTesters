@@ -9,12 +9,18 @@ public class NavigationHelper extends HelperBase {
     super(wd);
   }
 
-  public void openHomePage() {
-    click(By.linkText("home"));
+  public void goToHomePage() {
+    //Page marker checking before navigation
+    if (!isElementPresent(By.name("MainForm"))) {
+      click(By.linkText("home"));
+    }
   }
 
-  public void gotoGroupPage() {
-    click(By.linkText("groups"));
+  public void goToGroupPage() {
+    //Page marker checking before navigation
+    if (!isElementPresent(By.cssSelector("input[value*='New group']"))) {
+      click(By.linkText("groups"));
+    }
   }
 
 }

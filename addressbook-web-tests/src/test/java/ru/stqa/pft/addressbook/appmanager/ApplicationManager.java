@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.safari.SafariDriver;
+import ru.stqa.pft.addressbook.model.GlobalSettings;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +18,8 @@ public class ApplicationManager {
   private GroupHelper groupHelper;
   private ContactHelper contactHelper;
   private String browser;
+
+  GlobalSettings gs = new GlobalSettings();
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -32,7 +35,7 @@ public class ApplicationManager {
     } else if (browser.equals(BrowserType.SAFARI)) {
       wd = new SafariDriver();
     }
-    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(gs.getLongWaiterTime(), TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/index.php");
     wd.manage().window().maximize();
     sessionHelper = new SessionHelper(wd);

@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.DateData;
 
@@ -15,7 +16,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("(//input[@name='submit'])"));
   }
 
-  public void fillContactForm(ContactData contactData) {
+  public void fillContactForm(ContactData contactData, Boolean isCreationMode) {
     typeInputField(By.name("firstname"), contactData.getFirstName());
     typeInputField(By.name("middlename"), contactData.getMiddleName());
     typeInputField(By.name("lastname"), contactData.getLastName());
@@ -26,13 +27,21 @@ public class ContactHelper extends HelperBase {
     typeInputField(By.name("mobile"), contactData.getMobilePhone());
     typeInputField(By.name("email"), contactData.getEmailAddress());
     typeInputField(By.name("homepage"), contactData.getHomeSite());
-    setBirthday(contactData.getBirthday());
+    if (contactData.getBirthday() != null) {
+      setBirthday(contactData.getBirthday());
+    }
+
+    if (isCreationMode){
+      //TODO selector group
+    }else{
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
 
   public void setBirthday(DateData dateData) {
-    selectValue(By.name("bday"), dateData.getDay());
-    selectValue(By.name("bmonth"), dateData.getMonth());
-    typeInputField(By.name("byear"), dateData.getYear());
+      selectValue(By.name("bday"), dateData.getDay());
+      selectValue(By.name("bmonth"), dateData.getMonth());
+      typeInputField(By.name("byear"), dateData.getYear());
   }
 
   public void initContactCreation() {
@@ -54,5 +63,19 @@ public class ContactHelper extends HelperBase {
 
   public void submitChanges() {
     click(By.name("update"));
+  }
+
+  public boolean isAnyContactsExist(){
+    return isElementPresent(By.name("selected[]"));
+  }
+
+  public void createSimpleContact() {
+    ContactData simpleContact = new ContactData("firstSimpleName", null, "lastSimpleName",
+        null, null, null, "London, Simple str, 1",
+        "+123456789", "simple@test.com", null,
+        null);
+    initContactCreation();
+    fillContactForm(simpleContact,true);
+    submitContactForm();
   }
 }

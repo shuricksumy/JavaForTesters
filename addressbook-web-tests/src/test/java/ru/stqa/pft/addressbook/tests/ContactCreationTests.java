@@ -16,9 +16,9 @@ public class ContactCreationTests extends TestBase {
         new DateData("1", "January", "2000"));
 
     app.getContactHelper().initContactCreation();
-    app.getContactHelper().fillContactForm(contact1);
+    app.getContactHelper().fillContactForm(contact1, true);
     app.getContactHelper().submitContactForm();
-    app.getNavigationHelper().openHomePage();
+    app.getNavigationHelper().goToHomePage();
   }
 
 }
