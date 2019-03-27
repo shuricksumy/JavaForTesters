@@ -21,13 +21,14 @@ public class ContactEditTests extends TestBase {
       app.getContactHelper().createSimpleContact();
       app.getNavigationHelper().goToHomePage();
     }
-    List<ContactData> contactsBeforeTest =  app.getContactHelper().getContactList();    app.getContactHelper().selectFirstContact();
+    List<ContactData> contactsBeforeTest = app.getContactHelper().getContactList();
+    app.getContactHelper().selectFirstContact();
     app.getContactHelper().initContactEdit();
     app.getContactHelper().fillContactForm(contact1, false);
     app.getContactHelper().submitChanges();
     app.getNavigationHelper().goToHomePage();
-    List<ContactData> contactsAfterTest =  app.getContactHelper().getContactList();
-    Assert.assertEquals(contactsAfterTest.size(),contactsBeforeTest.size());
+    List<ContactData> contactsAfterTest = app.getContactHelper().getContactList();
+    Assert.assertEquals(contactsAfterTest.size(), contactsBeforeTest.size());
 
     Assert.assertTrue(contactsAfterTest.contains(contact1));
   }

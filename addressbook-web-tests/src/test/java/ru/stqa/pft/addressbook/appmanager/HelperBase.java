@@ -55,7 +55,7 @@ public class HelperBase {
     }
   }
 
-  public int getCounterElementsBy (By selector){
+  public int getCounterElementsBy(By selector) {
     wd.manage().timeouts().implicitlyWait(gs.getQuickWaiterTime(), TimeUnit.SECONDS);
     int counter = wd.findElements(selector).size();
     wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);

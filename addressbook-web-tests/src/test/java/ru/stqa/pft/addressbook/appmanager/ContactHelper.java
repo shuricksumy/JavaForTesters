@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.DateData;
-import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,17 +36,17 @@ public class ContactHelper extends HelperBase {
       setBirthday(contactData.getBirthday());
     }
 
-    if (isCreationMode){
+    if (isCreationMode) {
       //TODO selector group
-    }else{
+    } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
 
   public void setBirthday(DateData dateData) {
-      selectValue(By.name("bday"), dateData.getDay());
-      selectValue(By.name("bmonth"), dateData.getMonth());
-      typeInputField(By.name("byear"), dateData.getYear());
+    selectValue(By.name("bday"), dateData.getDay());
+    selectValue(By.name("bmonth"), dateData.getMonth());
+    typeInputField(By.name("byear"), dateData.getYear());
   }
 
   public void initContactCreation() {
@@ -71,7 +70,7 @@ public class ContactHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public boolean isAnyContactsExist(){
+  public boolean isAnyContactsExist() {
     return isElementPresent(By.name("selected[]"));
   }
 
@@ -81,7 +80,7 @@ public class ContactHelper extends HelperBase {
         "+123456789", "simple@test.com", null,
         null);
     initContactCreation();
-    fillContactForm(simpleContact,true);
+    fillContactForm(simpleContact, true);
     submitContactForm();
   }
 
@@ -91,21 +90,21 @@ public class ContactHelper extends HelperBase {
 
   public List<ContactData> getContactList() {
     wd.manage().timeouts().implicitlyWait(gs.getQuickWaiterTime(), TimeUnit.SECONDS);
-      List<ContactData> contacts = new ArrayList<ContactData>();
-      List<WebElement> contactElements = wd.findElements(By.cssSelector("tr[name='entry']"));
-      for (WebElement el : contactElements) {
-        String contactLastName = el.findElements(By.cssSelector("td")).get(1).getText();
-        String contactFirstName = el.findElements(By.cssSelector("td")).get(2).getText();
-        String contactAddress = el.findElements(By.cssSelector("td")).get(3).getText();
-        String contactEnmail = el.findElements(By.cssSelector("td")).get(4).getText();
-        String contactPhone = el.findElements(By.cssSelector("td")).get(5).getText();
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> contactElements = wd.findElements(By.cssSelector("tr[name='entry']"));
+    for (WebElement el : contactElements) {
+      String contactLastName = el.findElements(By.cssSelector("td")).get(1).getText();
+      String contactFirstName = el.findElements(By.cssSelector("td")).get(2).getText();
+      String contactAddress = el.findElements(By.cssSelector("td")).get(3).getText();
+      String contactEnmail = el.findElements(By.cssSelector("td")).get(4).getText();
+      String contactPhone = el.findElements(By.cssSelector("td")).get(5).getText();
 
-        ContactData contact = new ContactData(contactFirstName,null,contactLastName,
-            null,null,null,contactAddress,contactPhone,contactEnmail,
-            null,null);
-        contacts.add(contact);
-      }
-    wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
-      return contacts;
+      ContactData contact = new ContactData(contactFirstName, null, contactLastName,
+          null, null, null, contactAddress, contactPhone, contactEnmail,
+          null, null);
+      contacts.add(contact);
     }
+    wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
+    return contacts;
+  }
 }
