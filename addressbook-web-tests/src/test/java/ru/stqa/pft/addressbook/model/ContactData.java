@@ -30,16 +30,38 @@ public class ContactData {
         this.id = Integer.MAX_VALUE;
     }
 
-    public ContactData(String firstName, String lastName, String address, String phone, String email, int id) {
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName);
+    }
+
+    public ContactData(String firstName, String lastName, int id) {
         this.firstName = firstName;
         this.middleName = null;
         this.lastName = lastName;
         this.nickname = null;
         this.title = null;
         this.companyName = null;
-        this.address = address;
-        this.mobilePhone = phone;
-        this.emailAddress = email;
+        this.address = null;
+        this.mobilePhone = null;
+        this.emailAddress = null;
         this.homeSite = null;
         this.birthday = null;
         this.id = id;
@@ -114,31 +136,4 @@ public class ContactData {
         return birthday;
     }
 
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", mobilePhone='" + mobilePhone + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData that = (ContactData) o;
-        return Objects.equals(firstName, that.firstName) &&
-                Objects.equals(lastName, that.lastName) &&
-                Objects.equals(address, that.address) &&
-                Objects.equals(mobilePhone, that.mobilePhone) &&
-                Objects.equals(emailAddress, that.emailAddress);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName, address, mobilePhone, emailAddress);
-    }
 }

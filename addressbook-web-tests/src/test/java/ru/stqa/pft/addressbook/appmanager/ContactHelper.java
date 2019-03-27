@@ -100,12 +100,8 @@ public class ContactHelper extends HelperBase {
             int id = Integer.parseInt(el.findElement(By.name("selected[]")).getAttribute("value"));
             String contactLastName = el.findElements(By.cssSelector("td")).get(1).getText();
             String contactFirstName = el.findElements(By.cssSelector("td")).get(2).getText();
-            String contactAddress = el.findElements(By.cssSelector("td")).get(3).getText();
-            String contactEnmail = el.findElements(By.cssSelector("td")).get(4).getText();
-            String contactPhone = el.findElements(By.cssSelector("td")).get(5).getText();
 
-            ContactData contact = new ContactData(contactFirstName, contactLastName, contactAddress, contactPhone, contactEnmail,
-                    id);
+            ContactData contact = new ContactData(contactFirstName, contactLastName, id);
             contacts.add(contact);
         }
         wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
