@@ -11,57 +11,62 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
 
-  private WebDriver wd;
+    private WebDriver wd;
 
-  private SessionHelper sessionHelper;
-  private NavigationHelper navigationHelper;
-  private GroupHelper groupHelper;
-  private ContactHelper contactHelper;
-  private String browser;
+    private SessionHelper sessionHelper;
+    private NavigationHelper navigationHelper;
+    private GroupHelper groupHelper;
+    private ContactHelper contactHelper;
+    private String browser;
 
-  GlobalSettings gs = new GlobalSettings();
+    GlobalSettings gs = new GlobalSettings();
 
-  public ApplicationManager(String browser) {
-    this.browser = browser;
-  }
-
-  public void init() {
-    if (browser.equals(BrowserType.CHROME)) {
-      System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-      wd = new ChromeDriver();
-    } else if (browser.equals(BrowserType.FIREFOX)) {
-      System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver");
-      wd = new FirefoxDriver();
-    } else if (browser.equals(BrowserType.SAFARI)) {
-      wd = new SafariDriver();
+    public ApplicationManager(String browser) {
+        this.browser = browser;
     }
-    wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
-    wd.get("http://localhost/addressbook/index.php");
-    wd.manage().window().maximize();
-    sessionHelper = new SessionHelper(wd);
-    navigationHelper = new NavigationHelper(wd);
-    groupHelper = new GroupHelper(wd);
-    contactHelper = new ContactHelper(wd);
-    sessionHelper.login("admin", "secret");
-  }
 
-  public void stop() {
-    wd.quit();
-  }
+    public void init() {
+        String execPrefix = "";
+        if (gs.getOperationSystem().equals("Windows")){
+            execPrefix = ".exe";
+        }
 
-  public SessionHelper getSessionHelper() {
-    return sessionHelper;
-  }
+        if (browser.equals(BrowserType.CHROME)) {
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver" + execPrefix);
+            wd = new ChromeDriver();
+        } else if (browser.equals(BrowserType.FIREFOX)) {
+            System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver" + execPrefix);
+            wd = new FirefoxDriver();
+        } else if (browser.equals(BrowserType.SAFARI)) {
+            wd = new SafariDriver();
+        }
+        wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
+        wd.get("http://localhost/addressbook/index.php");
+        wd.manage().window().maximize();
+        sessionHelper = new SessionHelper(wd);
+        navigationHelper = new NavigationHelper(wd);
+        groupHelper = new GroupHelper(wd);
+        contactHelper = new ContactHelper(wd);
+        sessionHelper.login("admin", "secret");
+    }
 
-  public NavigationHelper getNavigationHelper() {
-    return navigationHelper;
-  }
+    public void stop() {
+        wd.quit();
+    }
 
-  public GroupHelper getGroupHelper() {
-    return groupHelper;
-  }
+    public SessionHelper getSessionHelper() {
+        return sessionHelper;
+    }
 
-  public ContactHelper getContactHelper() {
-    return contactHelper;
-  }
+    public NavigationHelper getNavigationHelper() {
+        return navigationHelper;
+    }
+
+    public GroupHelper getGroupHelper() {
+        return groupHelper;
+    }
+
+    public ContactHelper getContactHelper() {
+        return contactHelper;
+    }
 }

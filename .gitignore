@@ -16,4 +16,5 @@ gradle-app.setting
 
 #ignore IDEA workspace
 .idea/workspace.xml
-
+.idea/checkstyle-idea.xml
+.idea/misc.xml
