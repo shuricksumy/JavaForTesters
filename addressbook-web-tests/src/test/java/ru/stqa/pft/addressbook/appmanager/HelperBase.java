@@ -38,8 +38,10 @@ public class HelperBase {
     try {
       wd.manage().timeouts().implicitlyWait(gs.getQuickWaiterTime(), TimeUnit.SECONDS);
       wd.findElement(by);
+      wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
       return true;
     } catch (NoSuchElementException e) {
+      wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
       return false;
     }
   }
@@ -51,5 +53,12 @@ public class HelperBase {
     } catch (NoAlertPresentException e) {
       return false;
     }
+  }
+
+  public int getCounterElementsBy (By selector){
+    wd.manage().timeouts().implicitlyWait(gs.getQuickWaiterTime(), TimeUnit.SECONDS);
+    int counter = wd.findElements(selector).size();
+    wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
+    return counter;
   }
 }

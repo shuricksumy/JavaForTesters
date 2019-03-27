@@ -2,9 +2,15 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.DateData;
+import ru.stqa.pft.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ContactHelper extends HelperBase {
 
@@ -78,4 +84,28 @@ public class ContactHelper extends HelperBase {
     fillContactForm(simpleContact,true);
     submitContactForm();
   }
+
+  public int getContactCount() {
+    return getCounterElementsBy(By.name("selected[]"));
+  }
+
+  public List<ContactData> getContactList() {
+    wd.manage().timeouts().implicitlyWait(gs.getQuickWaiterTime(), TimeUnit.SECONDS);
+      List<ContactData> contacts = new ArrayList<ContactData>();
+      List<WebElement> contactElements = wd.findElements(By.cssSelector("tr[name='entry']"));
+      for (WebElement el : contactElements) {
+        String contactLastName = el.findElements(By.cssSelector("td")).get(1).getText();
+        String contactFirstName = el.findElements(By.cssSelector("td")).get(2).getText();
+        String contactAddress = el.findElements(By.cssSelector("td")).get(3).getText();
+        String contactEnmail = el.findElements(By.cssSelector("td")).get(4).getText();
+        String contactPhone = el.findElements(By.cssSelector("td")).get(5).getText();
+
+        ContactData contact = new ContactData(contactFirstName,null,contactLastName,
+            null,null,null,contactAddress,contactPhone,contactEnmail,
+            null,null);
+        contacts.add(contact);
+      }
+    wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
+      return contacts;
+    }
 }

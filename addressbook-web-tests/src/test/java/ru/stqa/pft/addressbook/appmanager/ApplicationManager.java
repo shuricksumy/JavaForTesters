@@ -35,7 +35,7 @@ public class ApplicationManager {
     } else if (browser.equals(BrowserType.SAFARI)) {
       wd = new SafariDriver();
     }
-    wd.manage().timeouts().implicitlyWait(gs.getLongWaiterTime(), TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/index.php");
     wd.manage().window().maximize();
     sessionHelper = new SessionHelper(wd);
