@@ -19,7 +19,6 @@ public class GroupHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-
   public void fillGroupForm(GroupData groupData) {
     typeInputField(By.name("group_name"), groupData.getName());
     typeInputField(By.name("group_header"), groupData.getHeader());
@@ -30,18 +29,8 @@ public class GroupHelper extends HelperBase {
     click(By.name("new"));
   }
 
-
   public void returnToGroupsList() {
     click(By.linkText("group page"));
-  }
-
-  public void deleteFirstGroup() {
-    selectFirstGroup();
-    click(By.name("delete"));
-  }
-
-  public void selectFirstGroup() {
-    click(By.name("selected[]"));
   }
 
   public void initGroupEdit() {
@@ -52,18 +41,10 @@ public class GroupHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public boolean isAnyExist() {
-    return isElementPresent(By.name("selected[]"));
-  }
-
   public void create() {
     initGroupCreation();
     fillGroupForm(new GroupData().withName("TestGroup1"));
     submitGroupForm();
-  }
-
-  public int getContactCount() {
-    return getCounterElementsBy(By.name("selected[]"));
   }
 
   public Groups all() {
