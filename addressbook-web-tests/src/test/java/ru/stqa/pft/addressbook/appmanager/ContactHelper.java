@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.DateData;
 
 import java.util.ArrayList;
@@ -66,8 +67,8 @@ public class ContactHelper extends HelperBase {
     click(By.name("selected[]"));
   }
 
-  public void initContactEdit(int number) {
-    wd.findElements(By.cssSelector("a img[title=Edit]")).get(number).click();
+  public void initContactEdit(int id) {
+    wd.findElement(By.cssSelector("a[href*='edit.php?id=" + id + "']")).click();
   }
 
   public void submitChanges() {
@@ -116,8 +117,32 @@ public class ContactHelper extends HelperBase {
     return contacts;
   }
 
+  public Contacts all() {
+    wd.manage().timeouts().implicitlyWait(gs.getQuickWaiterTime(), TimeUnit.SECONDS);
+    Contacts contacts = new Contacts();
+    List<WebElement> contactElements = wd.findElements(By.cssSelector("tr[name='entry']"));
+    for (WebElement el : contactElements) {
+      int id = Integer.parseInt(el.findElement(By.name("selected[]")).getAttribute("value"));
+      String contactLastName = el.findElements(By.cssSelector("td")).get(1).getText();
+      String contactFirstName = el.findElements(By.cssSelector("td")).get(2).getText();
+
+      ContactData contact = new ContactData()
+          .withFirstName(contactFirstName)
+          .withLastName(contactLastName)
+          .withId(id);
+
+      contacts.add(contact);
+    }
+    wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
+    return contacts;
+  }
+
   public void selectContactByNumber(int number) {
     wd.findElements(By.name("selected[]")).get(number).click();
+  }
+
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
 
@@ -128,16 +153,16 @@ public class ContactHelper extends HelperBase {
     backToHomePage();
   }
 
-  public void delete(int index) {
-    selectContactByNumber(index);
+  public void delete(ContactData contact) {
+    selectContactById(contact.getId());
     deleteSelectedContact();
     backToHomePage();
   }
 
-  public void edit(int index, ContactData contact1) {
-    selectContactByNumber(index);
-    initContactEdit(index);
-    fillContactForm(contact1, false);
+  public void edit(ContactData contact) {
+    selectContactById(contact.getId());
+    initContactEdit(contact.getId());
+    fillContactForm(contact, false);
     submitChanges();
     backToHomePage();
   }

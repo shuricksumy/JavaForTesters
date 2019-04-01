@@ -1,30 +1,31 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.DateData;
 
-import java.util.Comparator;
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class ContactEditTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().homePage();
-    if (app.contact().list().size() == 0) {
+    if (app.contact().all().size() == 0) {
       app.contact().createSimple();
     }
   }
 
   @Test
   public void testContactEdit() throws Exception {
-    List<ContactData> contactsBeforeTest = app.contact().list();
-    int index = contactsBeforeTest.size() - 1;
-    int idEditElement = contactsBeforeTest.get(index).getId();
-    ContactData contact1 = new ContactData()
+    Contacts contactsBeforeTest = app.contact().all();
+    ContactData modifiedContact = contactsBeforeTest.iterator().next();
+
+    ContactData contact = new ContactData()
         .withFirstName("firstUserNameEdit")
         .withMiddleName("middleUserNameEdit")
         .withLastName("lastUserNameEdit")
@@ -39,19 +40,16 @@ public class ContactEditTests extends TestBase {
             .withDay("13")
             .withMonth("April")
             .withYear("2002"))
-        .withId(idEditElement);
+        .withId(modifiedContact.getId());
 
-    app.contact().edit(index, contact1);
+    app.contact().edit(contact);
 
-    List<ContactData> contactsAfterTest = app.contact().list();
-    Assert.assertEquals(contactsAfterTest.size(), contactsBeforeTest.size());
+    Contacts contactsAfterTest = app.contact().all();
+    assertEquals(contactsAfterTest.size(), contactsBeforeTest.size());
 
-    contactsBeforeTest.removeIf(c -> c.getId() == idEditElement);
-    contactsBeforeTest.add(contact1);
-
-    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-    contactsBeforeTest.sort(byId);
-    contactsAfterTest.sort(byId);
-    Assert.assertEquals(contactsBeforeTest, contactsAfterTest);
+    contactsBeforeTest.remove(modifiedContact);
+    contactsBeforeTest.add(contact);
+    assertEquals(contactsBeforeTest, contactsAfterTest);
+    assertThat(contactsAfterTest, equalTo(contactsBeforeTest.without(modifiedContact).withAdded(contact)));
   }
 }
