@@ -8,7 +8,7 @@ public class GlobalSettings {
   private int middleWaiterTime = 10;
   private int quickWaiterTime = 1;
   //Windows, Mac
-  private String operationSystem = "Windows";
+  private String operationSystem = "Mac";
   //FIREFOX,CHROME,SAFARI
   private String browser = BrowserType.FIREFOX;
 

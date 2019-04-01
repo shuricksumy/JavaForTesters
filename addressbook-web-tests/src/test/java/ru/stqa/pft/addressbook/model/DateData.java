@@ -1,15 +1,9 @@
 package ru.stqa.pft.addressbook.model;
 
 public class DateData {
-  private final String day;
-  private final String month;
-  private final String year;
-
-  public DateData(String day, String month, String year) {
-    this.day = day;
-    this.month = month;
-    this.year = year;
-  }
+  private String day;
+  private String month;
+  private String year;
 
   public String getDay() {
     return day;
@@ -21,5 +15,20 @@ public class DateData {
 
   public String getYear() {
     return year;
+  }
+
+  public DateData withDay(String day) {
+    this.day = day;
+    return this;
+  }
+
+  public DateData withMonth(String month) {
+    this.month = month;
+    return this;
+  }
+
+  public DateData withYear(String year) {
+    this.year = year;
+    return this;
   }
 }

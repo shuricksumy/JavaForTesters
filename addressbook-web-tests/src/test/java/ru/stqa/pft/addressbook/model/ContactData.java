@@ -3,137 +3,147 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-    private final String firstName;
-    private final String middleName;
-    private final String lastName;
-    private final String nickname;
-    private final String title;
-    private final String companyName;
-    private final String address;
-    private final String mobilePhone;
-    private final String emailAddress;
-    private final String homeSite;
-    private final DateData birthday;
+  private String firstName;
+  private String middleName;
+  private String lastName;
+  private String nickname;
+  private String title;
+  private String companyName;
+  private String address;
+  private String mobilePhone;
+  private String emailAddress;
+  private String homeSite;
+  private DateData birthday;
+  private int id = Integer.MAX_VALUE;
+  ;
 
-    public ContactData(String firstName, String middleName, String lastName, String nickname, String title, String companyName, String address, String mobilePhone, String emailAddress, String homeSite, DateData birthday) {
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.nickname = nickname;
-        this.title = title;
-        this.companyName = companyName;
-        this.address = address;
-        this.mobilePhone = mobilePhone;
-        this.emailAddress = emailAddress;
-        this.homeSite = homeSite;
-        this.birthday = birthday;
-        this.id = Integer.MAX_VALUE;
-    }
+  @Override
+  public String toString() {
+    return "ContactData{" +
+        "firstName='" + firstName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        '}';
+  }
 
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
-    }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return Objects.equals(firstName, that.firstName) &&
+        Objects.equals(lastName, that.lastName);
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData that = (ContactData) o;
-        return Objects.equals(firstName, that.firstName) &&
-                Objects.equals(lastName, that.lastName);
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(firstName, lastName);
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName);
-    }
+  public int getId() {
+    return id;
+  }
 
-    public ContactData(String firstName, String lastName, int id) {
-        this.firstName = firstName;
-        this.middleName = null;
-        this.lastName = lastName;
-        this.nickname = null;
-        this.title = null;
-        this.companyName = null;
-        this.address = null;
-        this.mobilePhone = null;
-        this.emailAddress = null;
-        this.homeSite = null;
-        this.birthday = null;
-        this.id = id;
-    }
+  public String getFirstName() {
+    return firstName;
+  }
 
-    public int getId() {
-        return id;
-    }
+  public String getMiddleName() {
+    return middleName;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public String getLastName() {
+    return lastName;
+  }
 
-    private int id;
+  public String getNickname() {
+    return nickname;
+  }
 
-    public ContactData(String firstName, String middleName, String lastName, String nickname, String title, String companyName, String address, String mobilePhone, String emailAddress, String homeSite, DateData birthday, int id) {
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.nickname = nickname;
-        this.title = title;
-        this.companyName = companyName;
-        this.address = address;
-        this.mobilePhone = mobilePhone;
-        this.emailAddress = emailAddress;
-        this.homeSite = homeSite;
-        this.birthday = birthday;
-        this.id = id;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public String getFirstName() {
-        return firstName;
-    }
+  public String getCompanyName() {
+    return companyName;
+  }
 
-    public String getMiddleName() {
-        return middleName;
-    }
+  public String getAddress() {
+    return address;
+  }
 
-    public String getLastName() {
-        return lastName;
-    }
+  public String getMobilePhone() {
+    return mobilePhone;
+  }
 
-    public String getNickname() {
-        return nickname;
-    }
+  public String getEmailAddress() {
+    return emailAddress;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public String getHomeSite() {
+    return homeSite;
+  }
 
-    public String getCompanyName() {
-        return companyName;
-    }
+  public DateData getBirthday() {
+    return birthday;
+  }
 
-    public String getAddress() {
-        return address;
-    }
+  public ContactData withFirstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
 
-    public String getMobilePhone() {
-        return mobilePhone;
-    }
+  public ContactData withMiddleName(String middleName) {
+    this.middleName = middleName;
+    return this;
+  }
 
-    public String getEmailAddress() {
-        return emailAddress;
-    }
+  public ContactData withLastName(String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
 
-    public String getHomeSite() {
-        return homeSite;
-    }
+  public ContactData withNickname(String nickname) {
+    this.nickname = nickname;
+    return this;
+  }
 
-    public DateData getBirthday() {
-        return birthday;
-    }
+  public ContactData withTitle(String title) {
+    this.title = title;
+    return this;
+  }
 
+  public ContactData withCompanyName(String companyName) {
+    this.companyName = companyName;
+    return this;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactData withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
+    return this;
+  }
+
+  public ContactData withEmailAddress(String emailAddress) {
+    this.emailAddress = emailAddress;
+    return this;
+  }
+
+  public ContactData withHomeSite(String homeSite) {
+    this.homeSite = homeSite;
+    return this;
+  }
+
+  public ContactData withBirthday(DateData birthday) {
+    this.birthday = birthday;
+    return this;
+  }
+
+  public ContactData withId(int id) {
+    this.id = id;
+    return this;
+  }
 }

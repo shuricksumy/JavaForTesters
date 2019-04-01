@@ -52,13 +52,13 @@ public class GroupHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public boolean isAnyGroupsExist() {
+  public boolean isAnyExist() {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public void createSimpleGroup() {
+  public void create() {
     initGroupCreation();
-    fillGroupForm(new GroupData("TestGroup1", null, null));
+    fillGroupForm(new GroupData().withName("TestGroup1"));
     submitGroupForm();
   }
 
@@ -66,14 +66,14 @@ public class GroupHelper extends HelperBase {
     return getCounterElementsBy(By.name("selected[]"));
   }
 
-  public List<GroupData> getGroupList() {
+  public List<GroupData> list() {
     wd.manage().timeouts().implicitlyWait(gs.getQuickWaiterTime(), TimeUnit.SECONDS);
     List<GroupData> groups = new ArrayList<GroupData>();
     List<WebElement> groupsElement = wd.findElements(By.cssSelector("span.group"));
     for (WebElement el : groupsElement) {
       String groupName = el.getText();
       int id = Integer.parseInt(el.findElement(By.tagName("input")).getAttribute("value"));
-      GroupData group = new GroupData(groupName, null, null, id);
+      GroupData group = new GroupData().withName(groupName).withId(id);
       groups.add(group);
     }
     wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
@@ -84,8 +84,24 @@ public class GroupHelper extends HelperBase {
     wd.findElements(By.name("selected[]")).get(number).click();
   }
 
-  public void deleteGroupByNumber(int i) {
+  public void delete(int i) {
     selectGroupByNumber(i);
     click(By.name("delete"));
+    returnToGroupsList();
+  }
+
+  public void modify(GroupData groupEdit, int index) {
+    selectGroupByNumber(index);
+    initGroupEdit();
+    fillGroupForm(groupEdit);
+    submitChanges();
+    returnToGroupsList();
+  }
+
+  public void create(GroupData group1) {
+    initGroupCreation();
+    fillGroupForm(group1);
+    submitGroupForm();
+    returnToGroupsList();
   }
 }
