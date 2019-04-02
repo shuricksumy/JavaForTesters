@@ -9,6 +9,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.DateData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -81,12 +82,20 @@ public class ContactHelper extends HelperBase {
     initContactCreation();
     fillContactForm(simpleContact, true);
     submitContactForm();
+    contactCache = null;
     backToHomePage();
   }
 
+  private Contacts contactCache = null;
+
+
   public Contacts all() {
+    if (contactCache != null) {
+      return new Contacts(contactCache);
+    }
+
     wd.manage().timeouts().implicitlyWait(gs.getQuickWaiterTime(), TimeUnit.SECONDS);
-    Contacts contacts = new Contacts();
+    contactCache = new Contacts();
     List<WebElement> contactElements = wd.findElements(By.cssSelector("tr[name='entry']"));
     for (WebElement el : contactElements) {
       int id = Integer.parseInt(el.findElement(By.name("selected[]")).getAttribute("value"));
@@ -98,10 +107,10 @@ public class ContactHelper extends HelperBase {
           .withLastName(contactLastName)
           .withId(id);
 
-      contacts.add(contact);
+      contactCache.add(contact);
     }
     wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
-    return contacts;
+    return contactCache;
   }
 
   public void selectContactById(int id) {
@@ -113,12 +122,14 @@ public class ContactHelper extends HelperBase {
     initContactCreation();
     fillContactForm(contact1, true);
     submitContactForm();
+    contactCache = null;
     backToHomePage();
   }
 
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
     deleteSelectedContact();
+    contactCache = null;
     backToHomePage();
   }
 
@@ -127,6 +138,7 @@ public class ContactHelper extends HelperBase {
     initContactEdit(contact.getId());
     fillContactForm(contact, false);
     submitChanges();
+    contactCache = null;
     backToHomePage();
   }
 

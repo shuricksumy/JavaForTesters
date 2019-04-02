@@ -15,7 +15,7 @@ public class GroupEditTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().groupPage();
     if (app.group().all().size() == 0) {
-      app.group().create();
+      app.group().createSimple();
       app.goTo().groupPage();
     }
   }
