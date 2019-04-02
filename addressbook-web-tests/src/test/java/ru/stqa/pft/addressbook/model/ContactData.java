@@ -11,7 +11,13 @@ public class ContactData {
   private String companyName;
   private String address;
   private String mobilePhone;
-  private String emailAddress;
+  private String homePhone;
+  private String workPhone;
+  private String allPhones;
+  private String emailAddressFirst;
+  private String emailAddressSecond;
+  private String emailAddressThird;
+  private String emailAddressAll;
   private String homeSite;
   private DateData birthday;
   private int id = Integer.MAX_VALUE;
@@ -29,14 +35,6 @@ public class ContactData {
   @Override
   public int hashCode() {
     return Objects.hash(firstName, lastName, id);
-  }
-
-  @Override
-  public String toString() {
-    return "ContactData{" +
-        "firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        '}';
   }
 
   public int getId() {
@@ -75,8 +73,33 @@ public class ContactData {
     return mobilePhone;
   }
 
-  public String getEmailAddress() {
-    return emailAddress;
+  public String getHomePhone() {
+    return homePhone;
+  }
+
+  public String getWorkPhone() {
+    return workPhone;
+  }
+
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+
+  public String getEmailAddressFirst() {
+    return emailAddressFirst;
+  }
+
+  public String getEmailAddressSecond() {
+    return emailAddressSecond;
+  }
+
+  public String getEmailAddressThird() {
+    return emailAddressThird;
+  }
+
+  public String getEmailAddressAll() {
+    return emailAddressAll;
   }
 
   public String getHomeSite() {
@@ -85,6 +108,30 @@ public class ContactData {
 
   public DateData getBirthday() {
     return birthday;
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+        "firstName='" + firstName + '\'' +
+        ", middleName='" + middleName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", nickname='" + nickname + '\'' +
+        ", title='" + title + '\'' +
+        ", companyName='" + companyName + '\'' +
+        ", address='" + address + '\'' +
+        ", mobilePhone='" + mobilePhone + '\'' +
+        ", homePhone='" + homePhone + '\'' +
+        ", workPhone='" + workPhone + '\'' +
+        ", allPhones='" + allPhones + '\'' +
+        ", emailAddressFirst='" + emailAddressFirst + '\'' +
+        ", emailAddressSecond='" + emailAddressSecond + '\'' +
+        ", emailAddressThird='" + emailAddressThird + '\'' +
+        ", emailAddressAll='" + emailAddressAll + '\'' +
+        ", homeSite='" + homeSite + '\'' +
+        ", birthday=" + birthday +
+        ", id=" + id +
+        '}';
   }
 
   public ContactData withFirstName(String firstName) {
@@ -127,8 +174,33 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withEmailAddress(String emailAddress) {
-    this.emailAddress = emailAddress;
+  public ContactData withHomePhone(String homePhone) {
+    this.homePhone = homePhone;
+    return this;
+  }
+
+  public ContactData withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
+    return this;
+  }
+
+  public ContactData withEmailAddressFirst(String emailAddressFirst) {
+    this.emailAddressFirst = emailAddressFirst;
+    return this;
+  }
+
+  public ContactData withEmailAddressSecond(String emailAddressSecond) {
+    this.emailAddressSecond = emailAddressSecond;
+    return this;
+  }
+
+  public ContactData withEmailAddressThird(String emailAddressThird) {
+    this.emailAddressThird = emailAddressThird;
+    return this;
+  }
+
+  public ContactData withEmailAddressAll(String emailAddressAll) {
+    this.emailAddressAll = emailAddressAll;
     return this;
   }
 
@@ -144,6 +216,11 @@ public class ContactData {
 
   public ContactData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
     return this;
   }
 }

@@ -69,7 +69,7 @@ public class GroupHelper extends HelperBase {
   }
 
   public void selectGroupById(int id) {
-    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    wd.findElement(By.cssSelector(String.format("input[value='%s']", id))).click();
   }
 
   public void delete(GroupData deletedGroup) {
@@ -96,5 +96,10 @@ public class GroupHelper extends HelperBase {
     returnToGroupsList();
   }
 
-
+  public int count() {
+    wd.manage().timeouts().implicitlyWait(gs.getQuickWaiterTime(), TimeUnit.SECONDS);
+    int count = wd.findElements(By.name("selected[]")).size();
+    wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
+    return count;
+  }
 }

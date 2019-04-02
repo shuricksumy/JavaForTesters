@@ -23,7 +23,7 @@ public class ContactCreationTests extends TestBase {
         .withCompanyName("testCompany")
         .withAddress("London, Main str, 33")
         .withMobilePhone("+123456789")
-        .withEmailAddress("email@test.com")
+        .withEmailAddressFirst("email@test.com")
         .withHomeSite("https://test.com")
         .withBirthday(new DateData()
             .withDay("1")
@@ -33,10 +33,10 @@ public class ContactCreationTests extends TestBase {
 
     Contacts contactsBeforeTest = app.contact().all();
     app.contact().create(contact);
+
+    Assert.assertEquals(app.contact().count(), contactsBeforeTest.size() + 1);
+
     Contacts contactsAfterTest = app.contact().all();
-    Assert.assertEquals(contactsAfterTest.size(), contactsBeforeTest.size() + 1);
-
-
     MatcherAssert.assertThat(contactsAfterTest, CoreMatchers.equalTo(contactsBeforeTest
         .withAdded(contact.withId(contactsAfterTest.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
