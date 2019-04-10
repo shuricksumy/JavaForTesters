@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.GlobalSettings;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class HelperBase {
@@ -23,6 +24,13 @@ public class HelperBase {
         inputField.clear();
         inputField.sendKeys(value);
       }
+    }
+  }
+
+  public void atach(By locator, File file) {
+    if (file != null) {
+      WebElement inputField = wd.findElement(locator);
+      inputField.sendKeys(file.getAbsolutePath());
     }
   }
 

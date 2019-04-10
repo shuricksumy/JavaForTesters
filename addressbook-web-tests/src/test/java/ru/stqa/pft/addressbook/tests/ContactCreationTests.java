@@ -9,10 +9,14 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.DateData;
 
+import java.io.File;
+
 public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() throws Exception {
+
+    File photo = new File("src/test/resources/logo.png");
 
     ContactData contact = new ContactData()
         .withFirstName("firstUserName")
@@ -29,7 +33,7 @@ public class ContactCreationTests extends TestBase {
             .withDay("1")
             .withMonth("January")
             .withYear("2000")
-        );
+        ).withPhoto(photo);
 
     Contacts contactsBeforeTest = app.contact().all();
     app.contact().create(contact);
@@ -40,5 +44,4 @@ public class ContactCreationTests extends TestBase {
     MatcherAssert.assertThat(contactsAfterTest, CoreMatchers.equalTo(contactsBeforeTest
         .withAdded(contact.withId(contactsAfterTest.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
-
 }

@@ -39,6 +39,7 @@ public class ContactHelper extends HelperBase {
     typeInputField(By.name("email2"), contactData.getEmailAddressSecond());
     typeInputField(By.name("email3"), contactData.getEmailAddressThird());
     typeInputField(By.name("homepage"), contactData.getHomeSite());
+    atach(By.name("photo"), contactData.getPhoto());
     if (contactData.getBirthday() != null) {
       setBirthday(contactData.getBirthday());
     }

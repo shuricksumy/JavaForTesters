@@ -1,26 +1,52 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+import java.io.File;
 import java.util.Objects;
 
+@XStreamAlias("contact")
 public class ContactData {
+  @Expose
   private String firstName;
+  @Expose
   private String middleName;
+  @Expose
   private String lastName;
+  @Expose
   private String nickname;
+  @Expose
   private String title;
+  @Expose
   private String companyName;
+  @Expose
   private String address;
+  @Expose
   private String mobilePhone;
+  @Expose
   private String homePhone;
+  @Expose
   private String workPhone;
+  @Expose
   private String allPhones;
+  @Expose
   private String emailAddressFirst;
+  @Expose
   private String emailAddressSecond;
+  @Expose
   private String emailAddressThird;
+  @Expose
   private String emailAddressAll;
+  @Expose
   private String homeSite;
+  @XStreamOmitField
   private DateData birthday;
+  @XStreamOmitField
   private int id = Integer.MAX_VALUE;
+  @XStreamOmitField
+  private File photo;
 
   @Override
   public boolean equals(Object o) {
@@ -35,6 +61,30 @@ public class ContactData {
   @Override
   public int hashCode() {
     return Objects.hash(firstName, lastName, id);
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+        "firstName='" + firstName + '\'' +
+        ", middleName='" + middleName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", nickname='" + nickname + '\'' +
+        ", title='" + title + '\'' +
+        ", companyName='" + companyName + '\'' +
+        ", address='" + address + '\'' +
+        ", mobilePhone='" + mobilePhone + '\'' +
+        ", homePhone='" + homePhone + '\'' +
+        ", workPhone='" + workPhone + '\'' +
+        ", allPhones='" + allPhones + '\'' +
+        ", emailAddressFirst='" + emailAddressFirst + '\'' +
+        ", emailAddressSecond='" + emailAddressSecond + '\'' +
+        ", emailAddressThird='" + emailAddressThird + '\'' +
+        ", emailAddressAll='" + emailAddressAll + '\'' +
+        ", homeSite='" + homeSite + '\'' +
+        ", birthday=" + birthday +
+        ", id=" + id +
+        '}';
   }
 
   public int getId() {
@@ -85,7 +135,6 @@ public class ContactData {
     return allPhones;
   }
 
-
   public String getEmailAddressFirst() {
     return emailAddressFirst;
   }
@@ -110,28 +159,8 @@ public class ContactData {
     return birthday;
   }
 
-  @Override
-  public String toString() {
-    return "ContactData{" +
-        "firstName='" + firstName + '\'' +
-        ", middleName='" + middleName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", nickname='" + nickname + '\'' +
-        ", title='" + title + '\'' +
-        ", companyName='" + companyName + '\'' +
-        ", address='" + address + '\'' +
-        ", mobilePhone='" + mobilePhone + '\'' +
-        ", homePhone='" + homePhone + '\'' +
-        ", workPhone='" + workPhone + '\'' +
-        ", allPhones='" + allPhones + '\'' +
-        ", emailAddressFirst='" + emailAddressFirst + '\'' +
-        ", emailAddressSecond='" + emailAddressSecond + '\'' +
-        ", emailAddressThird='" + emailAddressThird + '\'' +
-        ", emailAddressAll='" + emailAddressAll + '\'' +
-        ", homeSite='" + homeSite + '\'' +
-        ", birthday=" + birthday +
-        ", id=" + id +
-        '}';
+  public File getPhoto() {
+    return photo;
   }
 
   public ContactData withFirstName(String firstName) {
@@ -221,6 +250,11 @@ public class ContactData {
 
   public ContactData withAllPhones(String allPhones) {
     this.allPhones = allPhones;
+    return this;
+  }
+
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
     return this;
   }
 }

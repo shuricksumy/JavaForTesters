@@ -1,6 +1,12 @@
 .gradle
 */build/
 */out/
+*contacts.xml
+*contacts.json
+*contacts.csv
+*groups.xml
+*groups.json
+*groups.csv
 
 # Ignore Gradle GUI config
 gradle-app.setting
