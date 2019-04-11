@@ -8,10 +8,42 @@ repositories {
     mavenCentral()
 }
 
+task testGroups(type: Test) {
+    useTestNG(){
+        useDefaultListeners = true
+        suites "src/test/resources/testng-groups.xml"
+    }
+    if (projects.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (projects.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+}
+
+task testContacts(type: Test) {
+    useTestNG(){
+        useDefaultListeners = true
+        suites "src/test/resources/testng-contacts.xml"
+    }
+    if (projects.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (projects.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+}
+
 test {
     useTestNG(){
         useDefaultListeners = true
-        suites "src/test/resources/simpleSuite.xml"
+        suites "src/test/resources/allTests.xml"
+    }
+    if (projects.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (projects.hasProperty('target')) {
+        systemProperty 'target', "${target}"
     }
 }
 

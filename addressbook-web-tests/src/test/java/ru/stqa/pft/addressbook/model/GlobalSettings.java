@@ -1,38 +1,42 @@
 package ru.stqa.pft.addressbook.model;
 
-import org.openqa.selenium.remote.BrowserType;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 
 public class GlobalSettings {
 
-  private int defaultWaiterTime = 30;
-  private int middleWaiterTime = 10;
-  private int quickWaiterTime = 1;
-  //Windows, Mac
-  private String operationSystem = "Mac";
-  //FIREFOX,CHROME,SAFARI
-  private String browser = BrowserType.FIREFOX;
+  private final Properties properties;
+  private int defaultTimeout;
+  private int middleTimeout;
+  private int quickTimeout;
 
-  public String getBrowser() {
-    return browser;
+  public GlobalSettings() {
+    properties = new Properties();
+    String target = System.getProperty("target", "local");
+    try {
+      properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+      this.defaultTimeout = Integer.parseInt(properties.getProperty("waiter.defaultTime"));
+      this.middleTimeout = Integer.parseInt(properties.getProperty("waiter.middleTime"));
+      this.quickTimeout = Integer.parseInt(properties.getProperty("waiter.quickTime"));
+    } catch (IOException ex) {
+      this.defaultTimeout = 30;
+      this.middleTimeout = 10;
+      this.quickTimeout = 1;
+    }
   }
 
   public int getDefaultWaiterTime() {
-    return defaultWaiterTime;
+    return defaultTimeout;
   }
 
   public int getMiddleWaiterTime() {
-    return middleWaiterTime;
+    return middleTimeout;
   }
 
   public int getQuickWaiterTime() {
-    return quickWaiterTime;
-  }
-
-  public String getOperationSystem() {
-    return operationSystem;
-  }
-
-  public GlobalSettings() {
+    return quickTimeout;
   }
 
 }
