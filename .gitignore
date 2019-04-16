@@ -7,6 +7,7 @@
 *groups.xml
 *groups.json
 *groups.csv
+*.log
 
 # Ignore Gradle GUI config
 gradle-app.setting
