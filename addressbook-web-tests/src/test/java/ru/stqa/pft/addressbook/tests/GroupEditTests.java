@@ -21,7 +21,6 @@ public class GroupEditTests extends TestBase {
 
   @Test
   public void testGroupEdit() throws Exception {
-    //Groups groupsBeforeTest = app.group().all();
     Groups groupsBeforeTest = app.db().groups();
     GroupData modifiedGroup = groupsBeforeTest.iterator().next();
 
@@ -36,12 +35,13 @@ public class GroupEditTests extends TestBase {
 
     assertThat(app.group().count(), equalTo(groupsBeforeTest.size()));
 
-    //Groups groupsAfterTest = app.group().all();
     Groups groupsAfterTest = app.db().groups();
 
     groupsBeforeTest.remove(modifiedGroup);
     groupsBeforeTest.add(group);
     assertEquals(groupsBeforeTest, groupsAfterTest);
     assertThat(groupsAfterTest, equalTo(groupsBeforeTest.without(modifiedGroup).withAdded(group)));
+
+    verifyGroupListInUI();
   }
 }

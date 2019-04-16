@@ -11,6 +11,7 @@ public class GlobalSettings {
   private int defaultTimeout;
   private int middleTimeout;
   private int quickTimeout;
+  private String verifyUI;
 
   public GlobalSettings() {
     properties = new Properties();
@@ -20,10 +21,12 @@ public class GlobalSettings {
       this.defaultTimeout = Integer.parseInt(properties.getProperty("waiter.defaultTime"));
       this.middleTimeout = Integer.parseInt(properties.getProperty("waiter.middleTime"));
       this.quickTimeout = Integer.parseInt(properties.getProperty("waiter.quickTime"));
+      this.verifyUI = properties.getProperty("test.verifyUI");
     } catch (IOException ex) {
       this.defaultTimeout = 30;
       this.middleTimeout = 10;
       this.quickTimeout = 1;
+      this.verifyUI = "true";
     }
   }
 
@@ -37,6 +40,10 @@ public class GlobalSettings {
 
   public int getQuickWaiterTime() {
     return quickTimeout;
+  }
+
+  public boolean isVerifyUI() {
+    return verifyUI.toLowerCase().equals("true");
   }
 
 }
