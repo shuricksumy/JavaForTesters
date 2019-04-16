@@ -3,50 +3,104 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
+@Entity
+@Table(name = "addressbook")
 @XStreamAlias("contact")
 public class ContactData {
+
   @Expose
+  @Column(name = "firstname")
   private String firstName;
+
   @Expose
+  @Column(name = "middlename")
   private String middleName;
+
   @Expose
+  @Column(name = "lastname")
   private String lastName;
+
   @Expose
+  @Column(name = "nickname")
   private String nickname;
+
   @Expose
+  @Column(name = "title")
   private String title;
+
   @Expose
+  @Column(name = "company")
   private String companyName;
+
   @Expose
+  @Column(name = "address")
+  @Type(type = "text")
   private String address;
+
   @Expose
+  @Column(name = "mobile")
+  @Type(type = "text")
   private String mobilePhone;
+
   @Expose
+  @Column(name = "home")
+  @Type(type = "text")
   private String homePhone;
+
   @Expose
+  @Column(name = "work")
+  @Type(type = "text")
   private String workPhone;
+
   @Expose
+  @Transient
   private String allPhones;
+
   @Expose
+  @Column(name = "email")
+  @Type(type = "text")
   private String emailAddressFirst;
+
   @Expose
+  @Column(name = "email2")
+  @Type(type = "text")
   private String emailAddressSecond;
+
   @Expose
+  @Column(name = "email3")
+  @Type(type = "text")
   private String emailAddressThird;
+
   @Expose
+  @Transient
   private String emailAddressAll;
+
   @Expose
+  @Column(name = "homepage")
+  @Type(type = "text")
   private String homeSite;
+
   @XStreamOmitField
+  @Transient
   private DateData birthday;
+
   @XStreamOmitField
+  @Id
   private int id = Integer.MAX_VALUE;
-  @XStreamOmitField
-  private File photo;
+
+  @Expose
+  @Column(name = "photo")
+  @Type(type = "text")
+  private String photo;
+
+  @Transient
+  private String group;
 
   @Override
   public boolean equals(Object o) {
@@ -160,7 +214,16 @@ public class ContactData {
   }
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
+  }
+
+  public String getGroup() {
+    return group;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
   }
 
   public ContactData withFirstName(String firstName) {
@@ -254,7 +317,7 @@ public class ContactData {
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 }

@@ -11,14 +11,14 @@ public class ContactAddressTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.goTo().homePage();
-    if (app.contact().all().size() == 0) {
+    if (app.db().contacts().size() == 0) {
       ContactData contact = new ContactData()
           .withFirstName("firstUserName")
           .withLastName("lastUserName")
           .withAddress("London, Main str, 33")
           .withEmailAddressFirst("email1@test.com")
           .withMobilePhone("333-333-33");
+      app.goTo().homePage();
       app.contact().create(contact);
     }
   }

@@ -79,7 +79,8 @@ public class ContactDataGenerator {
           .withAddress(String.format("London, Main str, %s", i))
           .withMobilePhone(String.format("+123456789%s", i))
           .withEmailAddressFirst(String.format("email+%s@test.com", i))
-          .withHomeSite(String.format("https://test_%s.com", i)));
+          .withHomeSite(String.format("https://test_%s.com", i))
+          .withPhoto(new File("src/test/resources/logo.png")));
     }
     return contacts;
   }

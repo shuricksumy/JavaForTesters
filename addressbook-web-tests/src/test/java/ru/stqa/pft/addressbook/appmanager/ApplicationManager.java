@@ -21,6 +21,7 @@ public class ApplicationManager {
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
   private ContactHelper contactHelper;
+  private DbHelper dbHelper;
   private String browser;
   private GlobalSettings gs = new GlobalSettings();
 
@@ -33,6 +34,9 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
+    //Start before browser to save time in case db connection issue
+    dbHelper = new DbHelper();
 
     if (browser.equals(BrowserType.CHROME)) {
       System.setProperty("webdriver.chrome.driver", properties.getProperty("chrome.driverPath"));
@@ -72,5 +76,9 @@ public class ApplicationManager {
 
   public ContactHelper contact() {
     return contactHelper;
+  }
+
+  public DbHelper db() {
+    return dbHelper;
   }
 }

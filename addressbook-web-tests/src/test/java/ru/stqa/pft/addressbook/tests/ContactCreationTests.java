@@ -60,12 +60,12 @@ public class ContactCreationTests extends TestBase {
   @Test(dataProvider = "validContactFromXML")
   public void testContactCreation(ContactData contact) throws Exception {
 
-    Contacts contactsBeforeTest = app.contact().all();
+    Contacts contactsBeforeTest = app.db().contacts();
     app.contact().create(contact);
 
     Assert.assertEquals(app.contact().count(), contactsBeforeTest.size() + 1);
 
-    Contacts contactsAfterTest = app.contact().all();
+    Contacts contactsAfterTest = app.db().contacts();
     MatcherAssert.assertThat(contactsAfterTest, CoreMatchers.equalTo(contactsBeforeTest
         .withAdded(contact.withId(contactsAfterTest.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
