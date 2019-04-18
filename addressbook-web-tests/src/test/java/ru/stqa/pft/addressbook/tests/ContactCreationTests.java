@@ -59,7 +59,6 @@ public class ContactCreationTests extends TestBase {
 
   @Test(dataProvider = "validContactFromXML")
   public void testContactCreation(ContactData contact) throws Exception {
-
     Contacts contactsBeforeTest = app.db().contacts();
     app.contact().create(contact);
 

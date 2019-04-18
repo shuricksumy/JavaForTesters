@@ -7,7 +7,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -99,8 +101,10 @@ public class ContactData {
   @Type(type = "text")
   private String photo;
 
-  @Transient
-  private String group;
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+      joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<>();
 
   @Override
   public boolean equals(Object o) {
@@ -115,30 +119,6 @@ public class ContactData {
   @Override
   public int hashCode() {
     return Objects.hash(firstName, lastName, id);
-  }
-
-  @Override
-  public String toString() {
-    return "ContactData{" +
-        "firstName='" + firstName + '\'' +
-        ", middleName='" + middleName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", nickname='" + nickname + '\'' +
-        ", title='" + title + '\'' +
-        ", companyName='" + companyName + '\'' +
-        ", address='" + address + '\'' +
-        ", mobilePhone='" + mobilePhone + '\'' +
-        ", homePhone='" + homePhone + '\'' +
-        ", workPhone='" + workPhone + '\'' +
-        ", allPhones='" + allPhones + '\'' +
-        ", emailAddressFirst='" + emailAddressFirst + '\'' +
-        ", emailAddressSecond='" + emailAddressSecond + '\'' +
-        ", emailAddressThird='" + emailAddressThird + '\'' +
-        ", emailAddressAll='" + emailAddressAll + '\'' +
-        ", homeSite='" + homeSite + '\'' +
-        ", birthday=" + birthday +
-        ", id=" + id +
-        '}';
   }
 
   public int getId() {
@@ -217,13 +197,11 @@ public class ContactData {
     return new File(photo);
   }
 
-  public String getGroup() {
-    return group;
-  }
-
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
+  public Groups getGroups() {
+    if (groups != null) {
+      return new Groups(groups);
+    }
+    return null;
   }
 
   public ContactData withFirstName(String firstName) {
@@ -319,5 +297,40 @@ public class ContactData {
   public ContactData withPhoto(File photo) {
     this.photo = photo.getPath();
     return this;
+  }
+
+  public ContactData withGroups(GroupData group) {
+    groups.add(group);
+    return this;
+  }
+
+  public ContactData withoutGroups(GroupData group) {
+    groups.remove(group);
+    return this;
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+        "firstName='" + firstName + '\'' +
+        ", middleName='" + middleName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", nickname='" + nickname + '\'' +
+        ", title='" + title + '\'' +
+        ", companyName='" + companyName + '\'' +
+        ", address='" + address + '\'' +
+        ", mobilePhone='" + mobilePhone + '\'' +
+        ", homePhone='" + homePhone + '\'' +
+        ", workPhone='" + workPhone + '\'' +
+        ", allPhones='" + allPhones + '\'' +
+        ", emailAddressFirst='" + emailAddressFirst + '\'' +
+        ", emailAddressSecond='" + emailAddressSecond + '\'' +
+        ", emailAddressThird='" + emailAddressThird + '\'' +
+        ", emailAddressAll='" + emailAddressAll + '\'' +
+        ", homeSite='" + homeSite + '\'' +
+        ", birthday=" + birthday +
+        ", id=" + id +
+        ", groups=" + groups +
+        '}';
   }
 }

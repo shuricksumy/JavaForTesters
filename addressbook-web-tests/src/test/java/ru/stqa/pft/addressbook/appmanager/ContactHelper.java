@@ -4,12 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.DateData;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -45,7 +47,11 @@ public class ContactHelper extends HelperBase {
     }
 
     if (isCreationMode) {
-      //TODO selector group
+      if (contactData.getGroups() != null && contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group")))
+            .selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -64,7 +70,7 @@ public class ContactHelper extends HelperBase {
   public void deleteSelectedContact() {
     click(By.cssSelector("input[onclick^=DeleteSel]"));
     wd.switchTo().alert().accept();
-    WebDriverWait wait = new WebDriverWait(wd, 10);
+    WebDriverWait wait = new WebDriverWait(wd, gs.getQuickWaiterTime());
     wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.msgbox")));
   }
 
@@ -82,7 +88,8 @@ public class ContactHelper extends HelperBase {
         .withLastName("lastSimpleName")
         .withAddress("London, Simple str, 1")
         .withMobilePhone("+123456789")
-        .withEmailAddressFirst("simple@test.com");
+        .withEmailAddressFirst("simple@test.com")
+        .withPhoto(new File("src/test/resources/logo.png"));
 
     initContactCreation();
     fillContactForm(simpleContact, true);
@@ -197,5 +204,31 @@ public class ContactHelper extends HelperBase {
         .withEmailAddressSecond(emailAddressSecond)
         .withEmailAddressThird(emailAddressThird)
         .withHomeSite(homeSite);
+  }
+
+  public void addToGroup(ContactData contact) {
+    selectContactById(contact.getId());
+    setDestinationGroup(contact.getGroups().iterator().next().getId());
+  }
+
+  private void setDestinationGroup(int id) {
+    new Select(wd.findElement(By.name("to_group")))
+        .selectByValue(Integer.toString(id));
+    wd.findElement(By.name("add")).click();
+    WebDriverWait wait = new WebDriverWait(wd, gs.getQuickWaiterTime());
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.msgbox")));
+  }
+
+  public void removeFromGroup(ContactData contact) {
+    openGroupItems(contact.getGroups().iterator().next().getId());
+    selectContactById(contact.getId());
+    wd.findElement(By.cssSelector("input[value*='Remove from']")).click();
+    WebDriverWait wait = new WebDriverWait(wd, gs.getQuickWaiterTime());
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.msgbox")));
+  }
+
+  private void openGroupItems(int id) {
+    new Select(wd.findElement(By.name("group")))
+        .selectByValue(Integer.toString(id));
   }
 }
