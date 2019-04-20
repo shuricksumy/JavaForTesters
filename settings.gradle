@@ -1,4 +1,6 @@
 rootProject.name = 'JavaForTesters'
 include 'sandbox'
 include 'addressbook-web-tests'
+include 'mantis-tests'
+include 'template-tests'
 
