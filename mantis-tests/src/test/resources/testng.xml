@@ -3,7 +3,7 @@
 <suite name="simpleSuite">
     <test name="GroupTests">
         <classes>
-            <class name="ru.stqa.pft.mantis.tests.FirstTest"/>
+            <class name="ru.stqa.pft.mantis.tests.LoginTests"/>
         </classes>
     </test>
 </suite>
