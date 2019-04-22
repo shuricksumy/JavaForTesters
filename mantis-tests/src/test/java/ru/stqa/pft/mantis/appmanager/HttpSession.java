@@ -21,7 +21,7 @@ public class HttpSession {
   private CloseableHttpClient httpclient;
   private ApplicationManager app;
 
-  public HttpSession(ApplicationManager app){
+  public HttpSession(ApplicationManager app) {
     this.app = app;
     httpclient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
   }
@@ -36,7 +36,7 @@ public class HttpSession {
     post.setEntity(new UrlEncodedFormEntity(params));
     CloseableHttpResponse response = httpclient.execute(post);
     String body = geTextForm(response);
-    return  body.contains(String.format("<span class=\"italic\">%s</span>", username));
+    return body.contains(String.format("<span class=\"italic\">%s</span>", username));
   }
 
   private String geTextForm(CloseableHttpResponse response) throws IOException {
@@ -53,9 +53,6 @@ public class HttpSession {
     String body = geTextForm(response);
     return body.contains(String.format("<span class=\"italic\">%s</span>", username));
   }
-
-
-
 
 
 }
