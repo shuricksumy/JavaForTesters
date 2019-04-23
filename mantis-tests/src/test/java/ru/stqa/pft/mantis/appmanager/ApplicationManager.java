@@ -23,6 +23,7 @@ public class ApplicationManager {
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private DbHelper dbHelper;
+  private AdminHelper adminHelper;
 
 
   public ApplicationManager(String browser) {
@@ -82,6 +83,13 @@ public class ApplicationManager {
     return wd;
   }
 
+  public void closeWebDriver() {
+    if (wd != null) {
+      wd.close();
+      wd = null;
+    }
+  }
+
   public MailHelper mail() {
     if (mailHelper == null) {
       mailHelper = new MailHelper(this);
@@ -95,4 +103,12 @@ public class ApplicationManager {
     }
     return dbHelper;
   }
+
+  public AdminHelper admin() {
+    if (adminHelper == null) {
+      adminHelper = new AdminHelper(this);
+    }
+    return adminHelper;
+  }
+
 }

@@ -71,5 +71,9 @@ public class HelperBase {
     wd.manage().timeouts().implicitlyWait(gs.getDefaultWaiterTime(), TimeUnit.SECONDS);
     return counter;
   }
+
+  public void clickByButtonName(String buttonName) {
+    click(By.cssSelector("input[value='" + buttonName + "']"));
+  }
 }
 

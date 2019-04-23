@@ -4,6 +4,8 @@
     <test name="GroupTests">
         <classes>
             <class name="ru.stqa.pft.mantis.tests.LoginTests"/>
+            <class name="ru.stqa.pft.mantis.tests.RegistrationTests"/>
+            <class name="ru.stqa.pft.mantis.tests.ResetPasswordTests"/>
         </classes>
     </test>
 </suite>
