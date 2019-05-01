@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/addressbook-web-tests" />
             <option value="$PROJECT_DIR$/mantis-tests" />
             <option value="$PROJECT_DIR$/sandbox" />
+            <option value="$PROJECT_DIR$/soap-sample" />
             <option value="$PROJECT_DIR$/template-tests" />
           </set>
         </option>
