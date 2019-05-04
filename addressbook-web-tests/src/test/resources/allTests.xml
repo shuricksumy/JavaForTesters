@@ -22,4 +22,10 @@
             <class name="ru.stqa.pft.addressbook.tests.ContactEmailTest"/>
         </classes>
     </test>
+    <test name="SpecificTests">
+        <classes>
+            <class name="ru.stqa.pft.addressbook.tests.ContactAddToGroupsTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.GroupFakeTests"/>
+        </classes>
+    </test>
 </suite>
