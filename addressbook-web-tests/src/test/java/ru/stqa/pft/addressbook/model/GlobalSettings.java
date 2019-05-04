@@ -25,7 +25,7 @@ public class GlobalSettings {
     } catch (IOException ex) {
       this.defaultTimeout = 30;
       this.middleTimeout = 10;
-      this.quickTimeout = 1;
+      this.quickTimeout = 5;
       this.verifyUI = "true";
     }
   }
