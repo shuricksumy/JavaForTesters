@@ -1,6 +1,7 @@
 .gradle
 */build/
 */out/
+*/allure-results/
 *.log
 
 # Ignore Gradle GUI config

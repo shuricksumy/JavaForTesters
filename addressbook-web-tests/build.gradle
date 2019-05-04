@@ -69,6 +69,28 @@ task testContacts(type: Test) {
     }
 }
 
+task cucumber(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/testng-cucumber.xml"
+    }
+    if (project.hasProperty("browser")) {
+        println "${browser}"
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty("target")) {
+        println "${target}"
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty("verifyUI")) {
+        println "${verifyUI}"
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('platform')) {
+        println "${platform}"
+        systemProperty 'platform', "${platform}"
+    }
+}
+
 test {
     useTestNG() {
         suites "src/test/resources/allTests.xml"
@@ -101,4 +123,6 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
     compile 'org.hibernate:hibernate-core:5.4.2.Final'
     testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile group: 'io.cucumber', name: 'cucumber-java', version: '4.3.0'
+    compile group: 'io.cucumber', name: 'cucumber-testng', version: '4.3.0'
 }

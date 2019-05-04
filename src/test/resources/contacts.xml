@@ -1,38 +1,38 @@
 <list>
-  <contact>
-    <firstName>firstUserName_0</firstName>
-    <middleName>middleUserName_0</middleName>
-    <lastName>lastUserName_0</lastName>
-    <nickname>nickUserName_0</nickname>
-    <title>userTitle_0</title>
-    <companyName>testCompany_0</companyName>
-    <address>London, Main str, 0</address>
-    <mobilePhone>+123456789_0</mobilePhone>
-    <emailAddressFirst>email+0@test.com</emailAddressFirst>
-    <homeSite>https://test_0.com</homeSite>
-  </contact>
-  <contact>
-    <firstName>firstUserName_1</firstName>
-    <middleName>middleUserName_1</middleName>
-    <lastName>lastUserName_1</lastName>
-    <nickname>nickUserName_1</nickname>
-    <title>userTitle_1</title>
-    <companyName>testCompany_1</companyName>
-    <address>London, Main str, 1</address>
-    <mobilePhone>+123456789_1</mobilePhone>
-    <emailAddressFirst>email+1@test.com</emailAddressFirst>
-    <homeSite>https://test_1.com</homeSite>
-  </contact>
-  <contact>
-    <firstName>firstUserName_2</firstName>
-    <middleName>middleUserName_2</middleName>
-    <lastName>lastUserName_2</lastName>
-    <nickname>nickUserName_2</nickname>
-    <title>userTitle_2</title>
-    <companyName>testCompany_2</companyName>
-    <address>London, Main str, 2</address>
-    <mobilePhone>+123456789_2</mobilePhone>
-    <emailAddressFirst>email+2@test.com</emailAddressFirst>
-    <homeSite>https://test_2.com</homeSite>
-  </contact>
+    <contact>
+        <firstName>firstUserName_0</firstName>
+        <middleName>middleUserName_0</middleName>
+        <lastName>lastUserName_0</lastName>
+        <nickname>nickUserName_0</nickname>
+        <title>userTitle_0</title>
+        <companyName>testCompany_0</companyName>
+        <address>London, Main str, 0</address>
+        <mobilePhone>+123456789_0</mobilePhone>
+        <emailAddressFirst>email+0@test.com</emailAddressFirst>
+        <homeSite>https://test_0.com</homeSite>
+    </contact>
+    <contact>
+        <firstName>firstUserName_1</firstName>
+        <middleName>middleUserName_1</middleName>
+        <lastName>lastUserName_1</lastName>
+        <nickname>nickUserName_1</nickname>
+        <title>userTitle_1</title>
+        <companyName>testCompany_1</companyName>
+        <address>London, Main str, 1</address>
+        <mobilePhone>+123456789_1</mobilePhone>
+        <emailAddressFirst>email+1@test.com</emailAddressFirst>
+        <homeSite>https://test_1.com</homeSite>
+    </contact>
+    <contact>
+        <firstName>firstUserName_2</firstName>
+        <middleName>middleUserName_2</middleName>
+        <lastName>lastUserName_2</lastName>
+        <nickname>nickUserName_2</nickname>
+        <title>userTitle_2</title>
+        <companyName>testCompany_2</companyName>
+        <address>London, Main str, 2</address>
+        <mobilePhone>+123456789_2</mobilePhone>
+        <emailAddressFirst>email+2@test.com</emailAddressFirst>
+        <homeSite>https://test_2.com</homeSite>
+    </contact>
 </list>

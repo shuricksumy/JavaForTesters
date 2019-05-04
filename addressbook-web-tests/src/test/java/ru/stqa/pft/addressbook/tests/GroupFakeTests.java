@@ -7,7 +7,7 @@ import ru.stqa.pft.addressbook.model.Groups;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class GroupFakeTests extends TestBase{
+public class GroupFakeTests extends TestBase {
   @Test
   public void testBadGroupCreation() throws Exception {
 
