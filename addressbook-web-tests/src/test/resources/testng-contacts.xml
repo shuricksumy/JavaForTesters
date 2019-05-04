@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="simpleSuite">
+    <test name="ContactTests">
+        <classes>
+            <class name="ru.stqa.pft.addressbook.tests.ContactCreationTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.ContactEditTests"/>
+            <class name="ru.stqa.pft.addressbook.tests.ContactDeleteTests"/>
+        </classes>
+    </test>
+    <test name="ContactDetailsTest">
+        <classes>
+            <class name="ru.stqa.pft.addressbook.tests.ContactAddressTest"/>
+            <class name="ru.stqa.pft.addressbook.tests.ContactPhoneTest"/>
+            <class name="ru.stqa.pft.addressbook.tests.ContactEmailTest"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,38 @@
+[
+  {
+    "firstName": "firstUserName_0",
+    "middleName": "middleUserName_0",
+    "lastName": "lastUserName_0",
+    "nickname": "nickUserName_0",
+    "title": "userTitle_0",
+    "companyName": "testCompany_0",
+    "address": "London, Main str, 0",
+    "mobilePhone": "+123456789_0",
+    "emailAddressFirst": "email+0@test.com",
+    "homeSite": "https://test_0.com"
+  },
+  {
+    "firstName": "firstUserName_1",
+    "middleName": "middleUserName_1",
+    "lastName": "lastUserName_1",
+    "nickname": "nickUserName_1",
+    "title": "userTitle_1",
+    "companyName": "testCompany_1",
+    "address": "London, Main str, 1",
+    "mobilePhone": "+123456789_1",
+    "emailAddressFirst": "email+1@test.com",
+    "homeSite": "https://test_1.com"
+  },
+  {
+    "firstName": "firstUserName_2",
+    "middleName": "middleUserName_2",
+    "lastName": "lastUserName_2",
+    "nickname": "nickUserName_2",
+    "title": "userTitle_2",
+    "companyName": "testCompany_2",
+    "address": "London, Main str, 2",
+    "mobilePhone": "+123456789_2",
+    "emailAddressFirst": "email+2@test.com",
+    "homeSite": "https://test_2.com"
+  }
+]

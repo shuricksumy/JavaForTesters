@@ -8,53 +8,53 @@ repositories {
     mavenCentral()
 }
 
-//task testGroups(type: Test) {
-//    useTestNG() {
-//        suites "src/test/resources/testng-groups.xml"
-//    }
-//    if (project.hasProperty("browser")) {
-//        println "${browser}"
-//        systemProperty 'browser', "${browser}"
-//    }
-//    if (project.hasProperty("target")) {
-//        println "${target}"
-//        systemProperty 'target', "${target}"
-//    }
-//    if (project.hasProperty("verifyUI")) {
-//        println "${verifyUI}"
-//        systemProperty 'verifyUI', "${verifyUI}"
-//    }
-//    if (project.hasProperty('platform')) {
-//        println "${platform}"
-//        systemProperty 'platform', "${platform}"
-//    }
-//}
-//
-//task testContacts(type: Test) {
-//    useTestNG() {
-//        suites "src/test/resources/testng-contacts.xml"
-//    }
-//    if (project.hasProperty("browser")) {
-//        println "${browser}"
-//        systemProperty 'browser', "${browser}"
-//    }
-//    if (project.hasProperty("target")) {
-//        println "${target}"
-//        systemProperty 'target', "${target}"
-//    }
-//    if (project.hasProperty("verifyUI")) {
-//        println "${verifyUI}"
-//        systemProperty 'verifyUI', "${verifyUI}"
-//    }
-//    if (project.hasProperty('platform')) {
-//        println "${platform}"
-//        systemProperty 'platform', "${platform}"
-//    }
-//}
+task testGroups(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/testng-groups.xml"
+    }
+    if (project.hasProperty("browser")) {
+        println "${browser}"
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty("target")) {
+        println "${target}"
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty("verifyUI")) {
+        println "${verifyUI}"
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('platform')) {
+        println "${platform}"
+        systemProperty 'platform', "${platform}"
+    }
+}
+
+task testContacts(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/testng-contacts.xml"
+    }
+    if (project.hasProperty("browser")) {
+        println "${browser}"
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty("target")) {
+        println "${target}"
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty("verifyUI")) {
+        println "${verifyUI}"
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('platform')) {
+        println "${platform}"
+        systemProperty 'platform', "${platform}"
+    }
+}
 
 test {
     useTestNG() {
-        suites "src/test/resources/testng-groups.xml"
+        suites "src/test/resources/allTests.xml"
     }
     if (project.hasProperty("browser")) {
         println "${browser}"
