@@ -10,7 +10,6 @@ repositories {
 
 task testGroups(type: Test) {
     useTestNG() {
-        useDefaultListeners = true
         suites "src/test/resources/testng-groups.xml"
     }
     if (project.hasProperty("browser")) {
@@ -33,7 +32,6 @@ task testGroups(type: Test) {
 
 task testContacts(type: Test) {
     useTestNG() {
-        useDefaultListeners = true
         suites "src/test/resources/testng-contacts.xml"
     }
     if (project.hasProperty("browser")) {
@@ -56,7 +54,6 @@ task testContacts(type: Test) {
 
 test {
     useTestNG() {
-        useDefaultListeners = true
         suites "src/test/resources/testng-groups.xml"
     }
     if (project.hasProperty("browser")) {
