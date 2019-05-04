@@ -26,6 +26,7 @@ task testGroups(type: Test) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
     if (project.hasProperty('platform')) {
+        println "${platform}"
         systemProperty 'platform', "${platform}"
     }
 }
@@ -35,16 +36,20 @@ task testContacts(type: Test) {
         useDefaultListeners = true
         suites "src/test/resources/testng-contacts.xml"
     }
-    if (project.hasProperty('browser')) {
+    if (project.hasProperty("browser")) {
+        println "${browser}"
         systemProperty 'browser', "${browser}"
     }
-    if (project.hasProperty('target')) {
+    if (project.hasProperty("target")) {
+        println "${target}"
         systemProperty 'target', "${target}"
     }
-    if (project.hasProperty('verifyUI')) {
+    if (project.hasProperty("verifyUI")) {
+        println "${verifyUI}"
         systemProperty 'verifyUI', "${verifyUI}"
     }
     if (project.hasProperty('platform')) {
+        println "${platform}"
         systemProperty 'platform', "${platform}"
     }
 }
@@ -52,18 +57,22 @@ task testContacts(type: Test) {
 test {
     useTestNG() {
         useDefaultListeners = true
-        suites "src/test/resources/allTests.xml"
+        suites "src/test/resources/testng-groups.xml"
     }
-    if (project.hasProperty('browser')) {
+    if (project.hasProperty("browser")) {
+        println "${browser}"
         systemProperty 'browser', "${browser}"
     }
-    if (project.hasProperty('target')) {
+    if (project.hasProperty("target")) {
+        println "${target}"
         systemProperty 'target', "${target}"
     }
-    if (project.hasProperty('verifyUI')) {
+    if (project.hasProperty("verifyUI")) {
+        println "${verifyUI}"
         systemProperty 'verifyUI', "${verifyUI}"
     }
     if (project.hasProperty('platform')) {
+        println "${platform}"
         systemProperty 'platform', "${platform}"
     }
 }
