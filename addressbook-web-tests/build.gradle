@@ -1,11 +1,28 @@
 apply plugin: "java"
 apply plugin: "application"
+apply plugin: "io.qameta.allure"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
+}
+
+buildscript {
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.3"
+    }
+}
+
+allure {
+    version = '2.2.1'
+    autoconfigure = true
 }
 
 task testGroups(type: Test) {
